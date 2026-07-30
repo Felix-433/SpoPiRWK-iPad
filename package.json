@@ -1,0 +1,9 @@
+{
+  "name": "spopirwk-ipad",
+  "version": "0.1.0",
+  "description": "Eigenständige iPad-Version von SpoPi RWK – Daten werden nur lokal im Browser gespeichert, kein Server nötig.",
+  "private": true,
+  "scripts": {
+    "dev": "npx --yes serve -l 5500 ."
+  }
+}

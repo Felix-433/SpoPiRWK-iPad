@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpoPi RWK – Ergebniserfassung</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="SpoPi RWK" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#123f27" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>SpoPi RWK</h1>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="wettkaempfe">Wettkämpfe</button>
+      <button class="tab-btn" data-tab="vereine">Vereine &amp; Schützen</button>
+      <button class="tab-btn" data-tab="tabelle">Tabelle Heimwettkämpfe</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="tab-wettkaempfe" class="tab-panel active">
+      <nav class="subtabs">
+        <button class="subtab-btn active" data-subtab="liste">Gespeicherte Wettkämpfe</button>
+        <button class="subtab-btn" data-subtab="neu">Neuen Wettkampf anlegen</button>
+      </nav>
+
+      <div id="subtab-liste" class="subtab-panel active">
+        <div id="match-list-card" class="card">
+          <h2>Gespeicherte Wettkämpfe</h2>
+          <ul id="match-list" class="item-list"></ul>
+        </div>
+
+        <div id="match-detail" class="card hidden"></div>
+      </div>
+
+      <div id="subtab-neu" class="subtab-panel">
+        <div class="card">
+          <h2>Neuer Wettkampf</h2>
+          <form id="match-form" class="inline-form">
+            <input type="date" id="match-datum" />
+            <select id="match-heim" required></select>
+            <span class="vs">gegen</span>
+            <select id="match-gast" required></select>
+            <button type="submit">Wettkampf anlegen</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-vereine" class="tab-panel">
+      <div class="panel-grid">
+        <div class="card">
+          <h2>Vereine</h2>
+          <form id="club-form" class="inline-form">
+            <input type="text" id="club-name" placeholder="Vereinsname" required />
+            <input type="number" id="club-nr" placeholder="Vereinsnr." />
+            <button type="submit">Verein hinzufügen</button>
+          </form>
+          <ul id="club-list" class="item-list"></ul>
+        </div>
+
+        <div class="card">
+          <h2>Schützen</h2>
+          <form id="shooter-form" class="inline-form">
+            <select id="shooter-club" required></select>
+            <input type="text" id="shooter-name" placeholder="Name" required />
+            <input type="text" id="shooter-passnr" placeholder="Pass-Nr. (optional)" />
+            <button type="submit">Schütze hinzufügen</button>
+          </form>
+          <div id="shooter-groups"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-tabelle" class="tab-panel">
+      <div class="card">
+        <h2>Tabelle Heimwettkämpfe</h2>
+        <table id="standings-table">
+          <thead>
+            <tr>
+              <th>Platz</th>
+              <th>Verein</th>
+              <th>Spiele</th>
+              <th>S</th>
+              <th>U</th>
+              <th>N</th>
+              <th>Punkte</th>
+              <th>Ringe</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
