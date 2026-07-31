@@ -1,4 +1,4 @@
-const CACHE_NAME = 'spopirwk-ipad-shell-v1';
+const CACHE_NAME = 'spopirwk-ipad-shell-v2';
 // Relative (no leading slash) since this also has to work when the site is
 // served from a GitHub Pages project subpath, not just the domain root.
 const SHELL_ASSETS = [

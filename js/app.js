@@ -439,6 +439,49 @@ function initForms() {
     await loadShooters();
   });
 
+  document.getElementById('import-btn').addEventListener('click', async () => {
+    const raw = document.getElementById('import-json').value.trim();
+    if (!raw) return;
+    let data;
+    try {
+      data = JSON.parse(raw);
+    } catch {
+      alert('Ungültiges JSON.');
+      return;
+    }
+
+    const clubNameToId = new Map(state.clubs.map((c) => [c.name, c.id]));
+    let clubsCreated = 0;
+    for (const club of data.clubs || []) {
+      if (clubNameToId.has(club.name)) continue;
+      const created = await api('/clubs', {
+        method: 'POST',
+        body: JSON.stringify({ name: club.name, vereinsNr: club.vereinsNr ?? null }),
+      });
+      clubNameToId.set(club.name, created.id);
+      clubsCreated += 1;
+    }
+
+    const existingShooters = new Set(state.shooters.map((s) => `${s.clubId}::${s.name}`));
+    let shootersCreated = 0;
+    for (const shooter of data.shooters || []) {
+      const clubId = clubNameToId.get(shooter.clubName);
+      if (!clubId) continue;
+      if (existingShooters.has(`${clubId}::${shooter.name}`)) continue;
+      await api('/shooters', {
+        method: 'POST',
+        body: JSON.stringify({ clubId, name: shooter.name, passNr: shooter.passNr ?? null }),
+      });
+      existingShooters.add(`${clubId}::${shooter.name}`);
+      shootersCreated += 1;
+    }
+
+    await loadClubs();
+    await loadShooters();
+    document.getElementById('import-json').value = '';
+    alert(`Importiert: ${clubsCreated} Vereine, ${shootersCreated} Schützen.`);
+  });
+
   document.getElementById('match-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const datum = document.getElementById('match-datum').value;
