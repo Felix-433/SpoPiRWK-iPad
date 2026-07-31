@@ -15,11 +15,12 @@
 </head>
 <body>
   <header class="topbar">
-    <h1>SpoPi RWK</h1>
+    <h1>SpoPi RWK (lokal)</h1>
     <nav class="tabs">
       <button class="tab-btn active" data-tab="wettkaempfe">Wettkämpfe</button>
       <button class="tab-btn" data-tab="vereine">Vereine &amp; Schützen</button>
       <button class="tab-btn" data-tab="tabelle">Tabelle Heimwettkämpfe</button>
+      <button class="tab-btn" data-tab="import">Daten importieren</button>
     </nav>
   </header>
 
@@ -75,13 +76,15 @@
           </form>
           <div id="shooter-groups"></div>
         </div>
+      </div>
+    </section>
 
-        <div class="card">
-          <h2>Vereine &amp; Schützen importieren</h2>
-          <p class="meta">Export-Text von der PC-Version hier einfügen.</p>
-          <textarea id="import-json" rows="4" placeholder="{ &quot;clubs&quot;: [...], &quot;shooters&quot;: [...] }"></textarea>
-          <button id="import-btn" type="button">Importieren</button>
-        </div>
+    <section id="tab-import" class="tab-panel">
+      <div class="card">
+        <h2>Vereine &amp; Schützen importieren</h2>
+        <p class="meta">Export-Text von der PC-Version hier einfügen.</p>
+        <textarea id="import-json" rows="4" placeholder="{ &quot;clubs&quot;: [...], &quot;shooters&quot;: [...] }"></textarea>
+        <button id="import-btn" type="button">Importieren</button>
       </div>
     </section>
 
